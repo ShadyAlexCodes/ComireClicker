@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComireClicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="800" Width="1000">
+    <Grid ShowGridLines="True">
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1" ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <StackPanel Grid.Column="0">
+            <Label Content="# OF 4CComireCokies" />
+            <Label Content="# 4CComireCokies Per Second" />
+            <Image Source="Resources/Comire.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>

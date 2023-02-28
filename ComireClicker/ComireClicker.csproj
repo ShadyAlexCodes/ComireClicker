@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Comire.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Comire.png" />
+  </ItemGroup>
+
 </Project>
