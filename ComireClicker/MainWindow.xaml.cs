@@ -24,5 +24,10 @@ namespace ComireClicker
         {
             InitializeComponent();
         }
+
+        private void btnMultiplier_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
