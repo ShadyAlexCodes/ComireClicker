@@ -71,8 +71,14 @@ namespace ComireClicker
                 grid.ColumnDefinitions.Add(colDilf2);
                 grid.ColumnDefinitions.Add(colDilf3);
                 TextBlock img = new TextBlock();
-                ing.Text = "img";
+                img.Text = "img";
                 Grid.SetColumn(img, 0);
+                Label lblMutliName = new Label();
+                lblMutliName.Content = multiplier.Name;
+                Grid.SetColumn(lblMutliName, 1);
+
+                Label lblPrice = new Label();
+                lblPrice.Content = ;
                 button.Content = multiplier.Name;
                 button.IsEnabled = multiplier.IsUnlocked;
                 button.Padding = new Thickness(5);
