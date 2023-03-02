@@ -63,9 +63,20 @@ namespace ComireClicker
            foreach(var multiplier in multipliers)
             {
                 Button button = new Button();
+                Grid grid = new Grid();
+                ColumnDefinition colDilf = new ColumnDefinition();   
+                ColumnDefinition colDilf2 = new ColumnDefinition();   
+                ColumnDefinition colDilf3 = new ColumnDefinition();   
+                grid.ColumnDefinitions.Add(colDilf);
+                grid.ColumnDefinitions.Add(colDilf2);
+                grid.ColumnDefinitions.Add(colDilf3);
+                TextBlock img = new TextBlock();
+                ing.Text = "img";
+                Grid.SetColumn(img, 0);
                 button.Content = multiplier.Name;
                 button.IsEnabled = multiplier.IsUnlocked;
                 button.Padding = new Thickness(5);
+
 
                 listOfMultipliers.Children.Add(button);
             }
