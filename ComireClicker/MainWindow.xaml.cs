@@ -65,15 +65,20 @@ namespace ComireClicker
                 Button button = new Button();
                 Grid grid = new Grid();
 
-                ColumnDefinition colDilf = new ColumnDefinition();   
-                ColumnDefinition colDilf2 = new ColumnDefinition();   
+                ColumnDefinition colDilf = new ColumnDefinition();
+                colDilf.Width = new GridLength(50);
+                ColumnDefinition colDilf2 = new ColumnDefinition();
+                
                 ColumnDefinition colDilf3 = new ColumnDefinition();   
+                colDilf3.Width = new GridLength(50);
                 grid.ColumnDefinitions.Add(colDilf);
                 grid.ColumnDefinitions.Add(colDilf2);
                 grid.ColumnDefinitions.Add(colDilf3);
 
                 Image multiplierImg = new Image();
                 multiplierImg.Source = new BitmapImage(new Uri("Resources/Comire.png", System.UriKind.Relative));
+                multiplierImg.Height = 30;
+                //multiplierImg
                 Grid.SetColumn(multiplierImg, 0);
 
                 Label lblMutliName = new Label();
