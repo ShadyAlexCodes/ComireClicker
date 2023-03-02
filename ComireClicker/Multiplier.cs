@@ -16,6 +16,7 @@ namespace ComireClicker
         private double startingCost;
         private double costIncreaseAmount;
         private int totalAmountInGame;
+        private double currentAmount;
         bool isUnlocked = false;
 
         // Maple, MapleLeafURI, 0.25, 1000, 100, 25, true
@@ -32,6 +33,7 @@ namespace ComireClicker
         public double StartingCost { get { return startingCost; } set { startingCost = value; } }
         public double CostIncreaseAmount { get { return costIncreaseAmount; } set { costIncreaseAmount = value; } }
         public bool IsUnlocked { get { return isUnlocked; } set { isUnlocked = value; } }
+        public double GameCurrentAmount {  get { return currentAmount; } }
 
         
         public Multiplier() { }
@@ -43,8 +45,14 @@ namespace ComireClicker
             StartingCost = startCost;
             CostIncreaseAmount = costIncrease;
             IsUnlocked = isUnlocked;
+            currentAmount = startCost;
         }
        
+
+        public void increaseCurrentAmount()
+        {
+            currentAmount += CostIncreaseAmount;
+        } 
 
     }
 }

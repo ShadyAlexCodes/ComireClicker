@@ -64,22 +64,32 @@ namespace ComireClicker
             {
                 Button button = new Button();
                 Grid grid = new Grid();
+
                 ColumnDefinition colDilf = new ColumnDefinition();   
                 ColumnDefinition colDilf2 = new ColumnDefinition();   
                 ColumnDefinition colDilf3 = new ColumnDefinition();   
                 grid.ColumnDefinitions.Add(colDilf);
                 grid.ColumnDefinitions.Add(colDilf2);
                 grid.ColumnDefinitions.Add(colDilf3);
-                TextBlock img = new TextBlock();
-                img.Text = "img";
-                Grid.SetColumn(img, 0);
+
+                Image multiplierImg = new Image();
+                multiplierImg.Source = new BitmapImage(new Uri("Resources/Comire.png", System.UriKind.Relative));
+                Grid.SetColumn(multiplierImg, 0);
+
                 Label lblMutliName = new Label();
                 lblMutliName.Content = multiplier.Name;
                 Grid.SetColumn(lblMutliName, 1);
 
                 Label lblPrice = new Label();
-                lblPrice.Content = ;
-                button.Content = multiplier.Name;
+                lblPrice.Content = multiplier.GameCurrentAmount;
+                Grid.SetColumn(lblPrice, 2);
+
+                grid.Children.Add(multiplierImg);
+                grid.Children.Add(lblMutliName);
+                grid.Children.Add(lblPrice);
+
+                
+                button.Content = grid;
                 button.IsEnabled = multiplier.IsUnlocked;
                 button.Padding = new Thickness(5);
 
@@ -87,5 +97,11 @@ namespace ComireClicker
                 listOfMultipliers.Children.Add(button);
             }
         }
+
+        /*
+         * 
+         * ON CLICK
+         * multipler.increaseCurrentAmount();
+         */
     }
 }
