@@ -12,7 +12,7 @@ namespace ComireClicker
     {
         private string name;
         private string imageURI;
-        private double multiply;
+        private double gameMultiplier;
         private double startingCost;
         private double costIncreaseAmount;
         private int totalAmountInGame;
@@ -26,22 +26,23 @@ namespace ComireClicker
          * 
          */
 
-        public string Name { get { return name; } set { } }
-        public string ImageURI { get { return imageURI; } set { } }
-        public double Multiply { get { return multiply; } set { multiply = value; } }
+        public string Name { get { return name; } set { name = value; } }
+        public string ImageURI { get { return imageURI; } set { imageURI = value; } }
+        public double GameMultiplier { get { return gameMultiplier; } set { gameMultiplier = value; } }
         public double StartingCost { get { return startingCost; } set { startingCost = value; } }
         public double CostIncreaseAmount { get { return costIncreaseAmount; } set { costIncreaseAmount = value; } }
+        public bool IsUnlocked { get { return isUnlocked; } set { isUnlocked = value; } }
 
         
         public Multiplier() { }
-        public Multiplier(string name, string imageURI, string multiply, double startCost, double costIncrease, bool isUnlocked)
+        public Multiplier(string name, string imageURI, double gameMultiplier, double startCost, double costIncrease, bool isUnlocked)
         {
             Name= name;
             ImageURI= imageURI;
-            Multiply = multiply;
+            GameMultiplier = gameMultiplier;
             StartingCost = startCost;
             CostIncreaseAmount = costIncrease;
-            //isUnlocked = isUnlocked;
+            IsUnlocked = isUnlocked;
         }
        
 

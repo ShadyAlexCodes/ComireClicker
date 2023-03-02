@@ -9,7 +9,7 @@
     Width="1000"
     Height="800"
     mc:Ignorable="d">
-    <Grid ShowGridLines="True">
+    <Grid x:Name="ComireBoard" ShowGridLines="True">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -42,18 +42,15 @@
                 Source="Resources/Comire.png" />
         </StackPanel>
         <!--  Ugrades/ Multipliers  -->
-        <StackPanel Grid.Column="2">
+        <StackPanel x:Name="listOfMultipliers" Grid.Column="2">
             <Label
                 Margin="5,15"
                 HorizontalAlignment="Center"
                 Content="Multipliers" />
-            <Button
+            <!--<Button
                 Name="btnMultiplierName"
                 Click="btnMultiplier_Click"
-                Content="test" />
-
-
-
+                Content="test" />-->
 
         </StackPanel>
     </Grid>

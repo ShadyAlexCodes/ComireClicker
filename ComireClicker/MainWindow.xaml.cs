@@ -20,14 +20,55 @@ namespace ComireClicker
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Multiplier> multipliers = new List<Multiplier>();
+        List<Multiplier> activeMultipliers = new List<Multiplier>();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            CreateMultipliersInstances();
         }
 
         private void btnMultiplier_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void CreateMultipliersInstances()
+        {
+            // CLEAR THE ARRAY FOR UR MOMS PURPOSES
+            multipliers.Clear();
+                                            // NAME     IMAGE       MULTIPLIER  STARTING    INCRASES BY
+            multipliers.Add(new Multiplier("Maple-Leaf", "MapleLeaf", 0.1, 0, 10, true));
+            multipliers.Add(new Multiplier("Shull-er", "", 1, 100, 15, false));
+            multipliers.Add(new Multiplier("Cox-ifer", "", 5, 500, 50, false));
+            multipliers.Add(new Multiplier("Beardall-er", "", 15, 1000, 100, false));
+            multipliers.Add(new Multiplier("Fox-ifyer", "", 25, 1500, 300, false));
+            multipliers.Add(new Multiplier("Berk-inator", "", 50, 5000, 600, false));
+            multipliers.Add(new Multiplier("Cantera-ina", "", 100, 5000, 600, false));
+            multipliers.Add(new Multiplier("Kohler-inator-3000", "", 150, 5000, 600, false));
+            multipliers.Add(new Multiplier("Sarah-bella", "", 250, 5000, 600, false));
+            multipliers.Add(new Multiplier("Marshall-ina", "", 500, 5000, 600, false));
+            multipliers.Add(new Multiplier("Pritchard-nator", "", 1000, 5000, 600, false));
+            multipliers.Add(new Multiplier("Parker-Dator", "", 12000, 5000, 600, false));
+            multipliers.Add(new Multiplier("Coal-Miner", "", 15000, 5000, 600, false));
+
+            GenerateMultiperButtons();
+
+        }
+
+        private void GenerateMultiperButtons()
+        {
+           foreach(var multiplier in multipliers)
+            {
+                Button button = new Button();
+                button.Content = multiplier.Name;
+                button.IsEnabled = multiplier.IsUnlocked;
+                button.Padding = new Thickness(5);
+
+                listOfMultipliers.Children.Add(button);
+            }
         }
     }
 }
