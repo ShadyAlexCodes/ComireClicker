@@ -39,6 +39,7 @@
             <Image
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                MouseDown="Image_MouseDown"
                 Source="Resources/Comire.png" />
         </StackPanel>
         <!--  Ugrades/ Multipliers  -->

@@ -11,6 +11,7 @@ namespace ComireClicker
     internal class Multiplier
     {
         private string name;
+        private string id;
         private string imageURI;
         private double gameMultiplier;
         private double startingCost;
@@ -28,6 +29,7 @@ namespace ComireClicker
          */
 
         public string Name { get { return name; } set { name = value; } }
+        public string Id { get { return id; } set { id = value; } }
         public string ImageURI { get { return imageURI; } set { imageURI = value; } }
         public double GameMultiplier { get { return gameMultiplier; } set { gameMultiplier = value; } }
         public double StartingCost { get { return startingCost; } set { startingCost = value; } }
@@ -37,8 +39,9 @@ namespace ComireClicker
 
         
         public Multiplier() { }
-        public Multiplier(string name, string imageURI, double gameMultiplier, double startCost, double costIncrease, bool isUnlocked)
+        public Multiplier(string id, string name, string imageURI, double gameMultiplier, double startCost, double costIncrease, bool isUnlocked)
         {
+            Id = id;
             Name= name;
             ImageURI= imageURI;
             GameMultiplier = gameMultiplier;
