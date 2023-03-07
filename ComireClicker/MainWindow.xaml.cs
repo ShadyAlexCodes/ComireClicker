@@ -24,7 +24,7 @@ namespace ComireClicker
         List<Multiplier> multipliers = new List<Multiplier>();
         List<Multiplier> activeMultipliers = new List<Multiplier>();
 
-        Multiplier mutiplyMeBby = new Multiplier("btnClick", "click", "", 1, 0, 1, 1, true);
+        Multiplier multiplyMeBby = new Multiplier("btnClick", "click", "", 1, 0, 1, 1, true);
 
         double gameMultiplier = 1;
 
@@ -154,7 +154,7 @@ namespace ComireClicker
                 listOfMultipliers.Children.Add(button);
             }
 
-            //mutiplyMeBby = multipliers[0];/
+            //multiplyMeBby = multipliers[0];/
         }
 
         protected void btnMultiplier_Click(object sender, RoutedEventArgs e)
@@ -176,15 +176,15 @@ namespace ComireClicker
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            mutiplyMeBby.increaseCurrentAmount();
+            multiplyMeBby.increaseCurrentAmount();
 
             int.TryParse(lblCurrentCookies.Content.ToString(), out int currentAmount);
 
 
             lblCurrentCookies.Content = currentAmount + 1;
 
-           // lblCurrentCookies.Content = mutiplyMeBby.GameCurrentAmount.ToString();
-           // txtMultiplier.Content = mutiplyMeBby.GameCurrentAmount.ToString();
+           // lblCurrentCookies.Content = multiplyMeBby.GameCurrentAmount.ToString();
+           // txtMultiplier.Content = multiplyMeBby.GameCurrentAmount.ToString();
         }
 
         /*

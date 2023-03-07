@@ -26,7 +26,7 @@
 
         <!--  Clicker  -->
         <StackPanel Grid.Column="0">
-            <Label x:Name="lblCurrentCookies"  Content="1" />
+            <Label x:Name="lblCurrentCookies"  Content="1"  />
             <!--  Multiplier Label  -->
             <Label Content="# 4CComireCokies Per Second" />
             <Label
