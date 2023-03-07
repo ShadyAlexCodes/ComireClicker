@@ -74,6 +74,7 @@ namespace ComireClicker
             }
 
             int.TryParse(lblCurrentCookies.Content.ToString(), out int currentAmount);
+            currentAmount= 1;
 
 
             lblCurrentCookies.Content = currentAmount * gameMultiplier;
