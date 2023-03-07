@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ComireClicker
 {
@@ -22,7 +23,10 @@ namespace ComireClicker
     {
         List<Multiplier> multipliers = new List<Multiplier>();
         List<Multiplier> activeMultipliers = new List<Multiplier>();
-        Multiplier mutiplyMeBby = new Multiplier("id","click", "", 1,0, 1, true);
+
+        Multiplier mutiplyMeBby = new Multiplier("btnClick", "click", "", 1, 0, 1, 1, true);
+
+        double gameMultiplier = 1;
 
 
         public MainWindow()
@@ -30,28 +34,73 @@ namespace ComireClicker
             InitializeComponent();
 
             CreateMultipliersInstances();
+
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
         }
 
+
+        //  DispatcherTimer setup
+ 
+
+    private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            // Updating the Label which displays the current second
+            txtMultiplier.Content = gameMultiplier.ToString();
+
+
+            // Iterate over all the multpliers
+            // Get the current multiploer
+
+            
+            foreach (var multiplier in multipliers)
+            {
+                double currentMulti = 0;
+                if (multiplier.IsUnlocked)
+                {                    
+                    for(int i = 0; i < multiplier.NumInGame; i++)
+                    {
+                        currentMulti += multiplier.GameMultiplier;
+                    }
+                }
+
+                gameMultiplier += currentMulti;
+                
+                // Get the current multiplier
+              //  multiplier.NumInGame;
+
+            }
+
+            int.TryParse(lblCurrentCookies.Content.ToString(), out int currentAmount);
+
+
+            lblCurrentCookies.Content = currentAmount * gameMultiplier;
+
+            // Forcing the CommandManager to raise the RequerySuggested event
+            CommandManager.InvalidateRequerySuggested();
+        }
 
 
         private void CreateMultipliersInstances()
         {
             // CLEAR THE ARRAY FOR UR MOMS PURPOSES
             multipliers.Clear();
-                                            // NAME     IMAGE       MULTIPLIER  STARTING    INCRASES BY
-            multipliers.Add(new Multiplier("Maple", "Maple-Leaf", "MapleLeaf", 0.1, 0, 10, true));
-            multipliers.Add(new Multiplier("Shull", "Shull-er", "", 1, 100, 15, false));
-            multipliers.Add(new Multiplier("Cox", "Cox-ifer", "", 5, 500, 50, false));
-            multipliers.Add(new Multiplier("Bear", "Beardall-er", "", 15, 1000, 100, false));
-            multipliers.Add(new Multiplier("Fox", "Fox-ifyer", "", 25, 1500, 300, false));
-            multipliers.Add(new Multiplier("Burk", "Berk-inator", "", 50, 5000, 600, false));
-            multipliers.Add(new Multiplier("Cantera", "Cantera-ina", "", 100, 5000, 600, false));
-            multipliers.Add(new Multiplier("Kohler","Kohler-inator-3000", "", 150, 5000, 600, false));
-            multipliers.Add(new Multiplier("Sarah", "Sarah-bella", "", 250, 5000, 600, false));
-            multipliers.Add(new Multiplier("Marshall", "Marshall-ina", "", 500, 5000, 600, false));
-            multipliers.Add(new Multiplier("Pritchard", "Pritchard-nator", "", 1000, 5000, 600, false));
-            multipliers.Add(new Multiplier("Parker", "Parker-Dator", "", 12000, 5000, 600, false));
-            multipliers.Add(new Multiplier("ComireTwo", "Coal-Miner", "", 15000, 5000, 600, false));
+                                         //  id,       name,        imageURI,     gameMultiplier, startCost, costIncrease, numInGame, isUnlocked
+            multipliers.Add(new Multiplier("btnMaple", "Maple-Leaf", "MapleLeaf", 0.1,             0,        10,             0, true));
+            multipliers.Add(new Multiplier("btnShull", "Shull-er", "", 1, 100, 15, 0, true));
+            multipliers.Add(new Multiplier("btnCox", "Cox-ifer", "", 5, 500, 50, 0, false));
+            multipliers.Add(new Multiplier("btnBear", "Beardall-er", "", 15, 1000, 100, 0, false));
+            multipliers.Add(new Multiplier("btnFox", "Fox-ifyer", "", 25, 1500, 300, 0, false));
+            multipliers.Add(new Multiplier("btnBurk", "Berk-inator", "", 50, 5000, 600, 0, false));
+            multipliers.Add(new Multiplier("btnCantera", "Cantera-ina", "", 100, 5000, 600, 0, false));
+            multipliers.Add(new Multiplier("btnKohler", "Kohler-inator-3000", "", 150, 5000, 600, 0, false));
+            multipliers.Add(new Multiplier("btnSarah", "Sarah-bella", "", 250, 5000, 600, 0, false));
+            multipliers.Add(new Multiplier("btnMarshall", "Marshall-ina", "", 500, 5000, 600, 0, false));
+            multipliers.Add(new Multiplier("btnPritchard", "Pritchard-nator", "", 1000, 5000, 600, 0, false));
+            multipliers.Add(new Multiplier("btnParker", "Parker-Dator", "", 12000, 5000, 600, 0, false));
+            multipliers.Add(new Multiplier("btnComireTwo", "Coal-Miner", "", 15000, 5000, 600, 0, false));
 
             GenerateMultiperButtons();
 
@@ -59,6 +108,8 @@ namespace ComireClicker
 
         private void GenerateMultiperButtons()
         {
+            listOfMultipliers.Children.Clear();
+
            foreach(var multiplier in multipliers)
             {
 
@@ -93,7 +144,7 @@ namespace ComireClicker
                 grid.Children.Add(lblMutliName);
                 grid.Children.Add(lblPrice);
 
-                button.Name = "btn" + multiplier.Id;
+                button.Name = multiplier.Id;
                 
                 button.Content = grid;
                 button.IsEnabled = multiplier.IsUnlocked;
@@ -110,14 +161,30 @@ namespace ComireClicker
         {
             Button btnSwitch = (Button)sender;
             //int content = Convert.ToInt32(button.Content);
-            MessageBox.Show(btnSwitch.Name);
+            
+            switch (btnSwitch.Name)
+            {
+                case "btnMaple":
+                    multipliers[0].NumInGame += 1;
+                    gameMultiplier += multipliers[0].GameMultiplier;
+                    break;
+            }
+
+            GenerateMultiperButtons();
 
         }
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             mutiplyMeBby.increaseCurrentAmount();
-            txtMultiplier.Content = mutiplyMeBby.GameCurrentAmount.ToString();
+
+            int.TryParse(lblCurrentCookies.Content.ToString(), out int currentAmount);
+
+
+            lblCurrentCookies.Content = currentAmount + 1;
+
+           // lblCurrentCookies.Content = mutiplyMeBby.GameCurrentAmount.ToString();
+           // txtMultiplier.Content = mutiplyMeBby.GameCurrentAmount.ToString();
         }
 
         /*
