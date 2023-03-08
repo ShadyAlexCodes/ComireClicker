@@ -28,13 +28,13 @@
         <StackPanel Grid.Column="0">
             <Label x:Name="lblCurrentCookies"  Content="1"  />
             <!--  Multiplier Label  -->
-            <Label Content="# 4CComireCokies Per Second" />
+            <Label x:Name="lblTest" Content="# 4CComireCokies Per Second" />
             <Label
-                x:Name="txtMultiplier"
+                x:Name="lblGameMultiplier"
                 Width="113"
                 BorderBrush="Black"
                 BorderThickness="1"
-                Content="hi" />
+                Content="1" />
             <!--  Comire cookie  -->
             <Image
                 HorizontalAlignment="Center"

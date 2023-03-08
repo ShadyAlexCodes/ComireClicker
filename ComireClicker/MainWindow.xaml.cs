@@ -21,11 +21,13 @@ namespace ComireClicker
     /// </summary>
     public partial class MainWindow : Window
     {
+        // A list of multipliers
         List<Multiplier> multipliers = new List<Multiplier>();
-        List<Multiplier> activeMultipliers = new List<Multiplier>();
-
+        
+        // Create the default multiplier (a click!)
         Multiplier multiplyMeBby = new Multiplier("btnClick", "click", "", 1, 0, 1, 1, true);
 
+        // Set the default game multiplier to 1
         double gameMultiplier = 1;
 
 
@@ -34,6 +36,8 @@ namespace ComireClicker
             InitializeComponent();
 
             CreateMultipliersInstances();
+
+            lblGameMultiplier.Content = gameMultiplier;
 
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -47,37 +51,11 @@ namespace ComireClicker
 
     private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            // Updating the Label which displays the current second
-            txtMultiplier.Content = gameMultiplier.ToString();
-
-
-            // Iterate over all the multpliers
-            // Get the current multiploer
-
-            
-            foreach (var multiplier in multipliers)
-            {
-                double currentMulti = 0;
-                if (multiplier.IsUnlocked)
-                {                    
-                    for(int i = 0; i < multiplier.NumInGame; i++)
-                    {
-                        currentMulti += multiplier.GameMultiplier;
-                    }
-                }
-
-                gameMultiplier += currentMulti;
-                
-                // Get the current multiplier
-              //  multiplier.NumInGame;
-
-            }
-
+            // Parse the current amount of cookies
             int.TryParse(lblCurrentCookies.Content.ToString(), out int currentAmount);
-            currentAmount= 1;
 
-
-            lblCurrentCookies.Content = currentAmount * gameMultiplier;
+            // Increase the cookies by the games current multiplier
+            lblCurrentCookies.Content = currentAmount + gameMultiplier;
 
             // Forcing the CommandManager to raise the RequerySuggested event
             CommandManager.InvalidateRequerySuggested();
@@ -122,7 +100,7 @@ namespace ComireClicker
                 ColumnDefinition colDilf2 = new ColumnDefinition();
                 
                 ColumnDefinition colDilf3 = new ColumnDefinition();   
-                colDilf3.Width = new GridLength(50);
+                colDilf3.Width = new GridLength(70);
                 grid.ColumnDefinitions.Add(colDilf);
                 grid.ColumnDefinitions.Add(colDilf2);
                 grid.ColumnDefinitions.Add(colDilf3);
@@ -138,7 +116,7 @@ namespace ComireClicker
                 Grid.SetColumn(lblMutliName, 1);
 
                 Label lblPrice = new Label();
-                lblPrice.Content = multiplier.GameCurrentAmount;
+                lblPrice.Content = multiplier.GameCurrentAmount + " | CA: " + multiplier.NumInGame;
                 Grid.SetColumn(lblPrice, 2);
 
                 grid.Children.Add(multiplierImg);
@@ -156,36 +134,64 @@ namespace ComireClicker
             }
 
             //multiplyMeBby = multipliers[0];/
+            
+
         }
 
         protected void btnMultiplier_Click(object sender, RoutedEventArgs e)
         {
+            // Gets the button clicked
             Button btnSwitch = (Button)sender;
-            //int content = Convert.ToInt32(button.Content);
-            
+
+            // Checks the buttons name
             switch (btnSwitch.Name)
             {
                 case "btnMaple":
+                    // Gets the position, and increased the total in the game
                     multipliers[0].NumInGame += 1;
-                    gameMultiplier += multipliers[0].GameMultiplier;
+                    // 
+                    //gameMultiplier += multipliers[0].GameMultiplier;
+                    break;
+                default:
                     break;
             }
 
+            // Re-generate the game's buttons
             GenerateMultiperButtons();
+
+            // Reset the game multiplier back to zero
+            gameMultiplier = 0;
+
+            // Iterate over all the multipliers
+            foreach (var multiplier in multipliers)
+            {
+                // Store a local multiplier
+                double currentMulti = 0;
+                // Check if the multiplier is unlocked
+                if (multiplier.IsUnlocked)
+                {
+                    // Increase the multiplier by multiplying the number in game by the game multiplier.
+                    currentMulti += (multiplier.NumInGame * multiplier.GameMultiplier);
+                }
+                // Increase the game multiplier
+                gameMultiplier += currentMulti;
+            }
+            
+            // Update the multiplyer amount
+            lblGameMultiplier.Content = gameMultiplier;
+
 
         }
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            multiplyMeBby.increaseCurrentAmount();
+            //multiplyMeBby.increaseCurrentAmount();
 
+            // Gets the current amount of cookies and assigns it to a numerical value
             int.TryParse(lblCurrentCookies.Content.ToString(), out int currentAmount);
+            //lblTest.Content = currentAmount.ToString();
 
-
-            lblCurrentCookies.Content = currentAmount + 1;
-
-           // lblCurrentCookies.Content = multiplyMeBby.GameCurrentAmount.ToString();
-           // txtMultiplier.Content = multiplyMeBby.GameCurrentAmount.ToString();
+            lblCurrentCookies.Content = (currentAmount + 1);
         }
 
         /*
