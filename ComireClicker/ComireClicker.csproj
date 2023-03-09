@@ -8,11 +8,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Beardall.png" />
+    <None Remove="Resources\Burk.png" />
+    <None Remove="Resources\Cantera.png" />
+    <None Remove="Resources\Carter.png" />
     <None Remove="Resources\Comire.png" />
+    <None Remove="Resources\Cox.png" />
+    <None Remove="Resources\Fox.png" />
+    <None Remove="Resources\Kohler.png" />
+    <None Remove="Resources\Maple.png" />
+    <None Remove="Resources\Marshall.png" />
+    <None Remove="Resources\Sarah.png" />
+    <None Remove="Resources\Shull.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Beardall.png" />
+    <Resource Include="Resources\Burk.png" />
+    <Resource Include="Resources\Cantera.png" />
+    <Resource Include="Resources\Carter.png" />
     <Resource Include="Resources\Comire.png" />
+    <Resource Include="Resources\Cox.png" />
+    <Resource Include="Resources\Fox.png" />
+    <Resource Include="Resources\Kohler.png" />
+    <Resource Include="Resources\Maple.png" />
+    <Resource Include="Resources\Marshall.png" />
+    <Resource Include="Resources\Sarah.png" />
+    <Resource Include="Resources\Shull.png" />
   </ItemGroup>
 
 </Project>
